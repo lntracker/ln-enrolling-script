@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Worksite Market Presentation Script</title>
+<style>
+  :root {
+    --navy: #1a2d5a;
+    --teal: #2a7f6f;
+    --gold: #c9a84c;
+    --gray-bg: #f5f6f8;
+    --gray-border: #dde1e8;
+    --text: #1c2333;
+    --text-muted: #5a6478;
+    --white: #ffffff;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Georgia, serif; background: var(--gray-bg); color: var(--text); font-size: 16px; line-height: 1.65; }
+  header { background: var(--navy); color: var(--white); padding: 20px 24px 14px; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(0,0,0,0.25); }
+  header p { font-family: Arial, sans-serif; font-size: 0.68rem; color: var(--gold); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 3px; }
+  header h1 { font-family: Arial, sans-serif; font-size: 1.2rem; color: var(--white); font-weight: 700; }
+  .progress-bar { height: 3px; background: rgba(255,255,255,0.15); margin-top: 10px; border-radius: 2px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--gold); width: 0%; transition: width 0.2s; border-radius: 2px; }
+  nav { background: var(--white); border-bottom: 1px solid var(--gray-border); display: flex; overflow-x: auto; }
+  nav button { background: none; border: none; border-bottom: 3px solid transparent; padding: 10px 14px; font-size: 0.7rem; font-family: Arial, sans-serif; color: var(--text-muted); cursor: pointer; white-space: nowrap; text-transform: uppercase; letter-spacing: 0.04em; font-weight: 600; }
+  nav button:hover { color: var(--navy); }
+  nav button.active { color: var(--navy); border-bottom-color: var(--teal); }
+  main { max-width: 780px; margin: 0 auto; padding: 28px 16px 80px; }
+  .section { background: var(--white); border-radius: 8px; border: 1px solid var(--gray-border); margin-bottom: 22px; overflow: hidden; scroll-margin-top: 120px; }
+  .section-header { background: var(--navy); color: var(--white); padding: 13px 18px; display: flex; align-items: center; gap: 10px; }
+  .page-badge { background: var(--gold); color: var(--navy); font-family: Arial, sans-serif; font-size: 0.62rem; font-weight: 800; letter-spacing: 0.06em; padding: 2px 7px; border-radius: 3px; text-transform: uppercase; white-space: nowrap; }
+  .section-title { font-family: Arial, sans-serif; font-size: 0.92rem; font-weight: 700; }
+  .section-body { padding: 18px 20px; }
+  .block { margin-bottom: 16px; }
+  .block:last-child { margin-bottom: 0; }
+  .lbl { font-family: Arial, sans-serif; font-size: 0.65rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--teal); margin-bottom: 4px; }
+  .line { font-size: 1rem; line-height: 1.7; color: var(--text); margin-bottom: 6px; }
+  .line:last-child { margin-bottom: 0; }
+  .blank { display: inline-block; min-width: 80px; border-bottom: 1.5px solid var(--navy); color: transparent; vertical-align: bottom; margin: 0 2px; }
+  .em { font-style: italic; color: var(--text-muted); font-size: 0.92rem; }
+  .strong-close { font-weight: bold; font-size: 1rem; margin-top: 8px; display: block; color: var(--navy); }
+  .action { background: var(--teal); color: var(--white); padding: 8px 13px; border-radius: 5px; font-family: Arial, sans-serif; font-size: 0.78rem; font-weight: 700; margin: 12px 0; }
+  .action::before { content: '▶ ACTION: '; opacity: 0.75; font-size: 0.68rem; }
+  .note { background: var(--gray-bg); border-left: 3px solid var(--gray-border); padding: 9px 13px; border-radius: 0 5px 5px 0; font-family: Arial, sans-serif; font-size: 0.8rem; color: var(--text-muted); margin: 12px 0; line-height: 1.5; }
+  .note strong { color: var(--text); }
+  ul.blist { margin: 6px 0 6px 18px; }
+  ul.blist li { margin-bottom: 5px; font-size: 0.95rem; }
+  .health-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
+  .hcard { background: #fff8ee; border: 1px solid #e8d9b0; border-radius: 5px; padding: 9px 11px; font-size: 0.8rem; line-height: 1.4; }
+  .hcard strong { display: block; color: #8a5a00; font-family: Arial, sans-serif; margin-bottom: 2px; }
+  hr.div { border: none; border-top: 1px solid var(--gray-border); margin: 14px 0; }
+  @media (max-width: 500px) { .health-grid { grid-template-columns: 1fr; } .section-body { padding: 14px; } }
+</style>
+</head>
+<body>
+
+<header>
+  <p>Globe Life Liberty National Division</p>
+  <h1>Worksite Market Presentation Script</h1>
+  <div class="progress-bar"><div class="progress-fill" id="pgbar"></div></div>
+</header>
+
+<nav id="topnav">
+  <button class="active" data-target="s-intro">Intro</button>
+  <button data-target="s-tomorrow">Make Tomorrow Better</button>
+  <button data-target="s-sports">Sports / Intro Offers</button>
+  <button data-target="s-signup">Sign Up / Leads</button>
+  <button data-target="s-needs">Needs Survey</button>
+  <button data-target="s-why">Why We're Here</button>
+  <button data-target="s-final-intro">Final Expense Intro</button>
+  <button data-target="s-freedom">Freedom of Choice</button>
+  <button data-target="s-groupterm">Group Term / FE Proposal</button>
+  <button data-target="s-income">Income Protection</button>
+  <button data-target="s-close">Final Offer / Close</button>
+</nav>
+
+<main>
+
+<!-- INTRO -->
+<div class="section" id="s-intro">
+  <div class="section-header"><span class="page-badge">Page 4</span><span class="section-title">Introduction to Liberty National Division</span></div>
+  <div class="section-body">
+    <div class="block">
+      <div class="lbl">Agent</div>
+      <div class="line">"<span class="blank">&nbsp;</span>, here you can see that…</div>
+      <div class="line">"We have been helping protect families for more than 125 years."</div>
+      <div class="line">"The Globe Life family of companies combined have more policyholders than any other life insurance company in the country."</div>
+      <div class="line">"Globe Life Liberty National Division paid more than $300 million in claims in 2024. That's more than $226 million in life claims and $73 million in health claims."</div>
+    </div>
+  </div>
+</div>
+
+<!-- MAKE TOMORROW BETTER -->
+<div class="section" id="s-tomorrow">
+  <div class="section-header"><span class="page-badge">Page 4</span><span class="section-title">Make Tomorrow Better</span></div>
+  <div class="section-body">
+    <div class="block">
+      <div class="lbl">Agent</div>
+      <div class="line">"As we grow, so do our efforts to give back to the communities where we live, work, and visit. Through our Make Tomorrow Better program, we donated more than $7 million in 2024 and have given countless volunteer hours to help those in need."</div>
+    </div>
+  </div>
+</div>
+
+<!-- SPORTS / INTRO OFFERS -->
+<div class="section" id="s-sports">
+  <div class="section-header"><span class="page-badge">Page 5</span><span class="section-title">Sports Partnerships &amp; Introductory Offers</span></div>
+  <div class="section-body">
+    <div class="block">
+      <div class="lbl">Agent — Sports Partnerships</div>
+      <div class="line">"Now, <span class="blank">&nbsp;</span>, are you a sports fan?"</div>
+      <div class="line">"We're very proud to say we're the official life insurance of the Texas Rangers, the Dallas Cowboys, and the Los Angeles Lakers. We are also a proud partner of the Atlanta Braves."</div>
+    </div>
+    <hr class="div">
+    <div class="block">
+      <div class="lbl">Agent — Introductory Offers</div>
+      <div class="line">"<span class="blank">&nbsp;</span>, the first thing I want to do is show you some benefits that <span class="em">(Business Owner)</span> has made available for you at no cost."</div>
+      <div class="line">"The first benefit is our Accidental Death Policy."</div>
+      <div class="line">"Today you will receive accidental death coverage in the amount of $3,000 for you, $3,000 for your spouse, and $1,000 each for any dependent children <span class="em">(in FL, $2,000 each for any dependent children)</span>."</div>
+      <div class="line">"Secondly, <span class="em">(Business Owner)</span> is allowing us to provide you with a No-Cost Discount Card that provides discounts with an average of 10% to 85% on services including:"</div>
+      <ul class="blist">
+        <li>Vision</li>
+        <li>Hearing</li>
+        <li>Prescription Drugs</li>
+        <li>Chiropractic Care</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- SIGN UP / LEADS -->
+<div class="section" id="s-signup">
+  <div class="section-header"><span class="page-badge">Page 6</span><span class="section-title">Introductory Offers: Sign Up &amp; Leads</span></div>
+  <div class="section-body">
+    <div class="block">
+      <div class="lbl">Agent — Sign Up</div>
+      <div class="line">"<span class="blank">&nbsp;</span>, to put these policies in place for you today I'll just need to get some additional information."</div>
+      <div class="line">"<span class="em">(Employee First Name)</span> is spelled <span class="em">(spell out first name)</span> and <span class="em">(Employee Last Name)</span> is spelled <span class="em">(spell out last name)</span>? What is your date of birth, height, and weight?"</div>
+    </div>
+    <div class="action">Fill out initial information on eApp.</div>
+    <div class="block">
+      <div class="lbl">Agent</div>
+      <div class="line">"Thank you for providing that information. Your Accidental Death Policy and No-Cost Discount Card should be in the mail within the next two to three weeks."</div>
+    </div>
+    <hr class="div">
+    <div class="block">
+      <div class="lbl">Agent — Leads</div>
+      <div class="line">"<span class="blank">&nbsp;</span>, the company is now allowing you to share these same benefits with people in your circle who you think can use it the most. Many of my clients refer a minimum of 10 people for this benefit. Who would you like to refer first? Who's next?"</div>
+    </div>
+    <div class="action">Collect up to 10 referrals from the client and enter information.</div>
+    <div class="block">
+      <div class="lbl">Agent</div>
+      <div class="line">"Thank you. I know your loved ones will appreciate you extending this benefit."</div>
+    </div>
+  </div>
+</div>
+
+<!-- NEEDS SURVEY -->
+<div class="section" id="s-needs">
+  <div class="section-header"><span class="page-badge">Page 7</span><span class="section-title">Employee Needs Survey</span></div>
+  <div class="section-body">
+    <div class="action">Fill out Needs Survey from top to bottom.</div>
+    <div class="block">
+      <div class="lbl">Agent</div>
+      <div class="line">"<span class="blank">&nbsp;</span>, when you pass away, do you have enough permanent life insurance to cover your final expenses?"</div>
+      <div class="line">"Let me ask you this: Are you at the youngest age you will ever be today?"</div>
+      <div class="line">"Typically, are you the healthiest you are ever going to be today?"</div>
+      <div class="line">"<span class="blank">&nbsp;</span>, if we can provide you coverage that fits your current needs, wouldn't it be beneficial for you to take advantage of those options today, as long as you qualify?"</div>
+    </div>
+    <div class="block">
+      <div class="lbl">Employee</div>
+      <div class="line">"Yes."</div>
+    </div>
+    <div class="block">
+      <div class="lbl">Agent</div>
+      <div class="line">"<span class="blank">&nbsp;</span>, in order to qualify to have access to these benefits, have you, your spouse, or children:"</div>
+    </div>
+    <div class="action">Ask health history questions.</div>
+    <div class="note"><strong>Note:</strong> If the employee answers "Yes" to any health history questions, consider the following:</div>
+    <div class="health-grid">
+      <div class="hcard"><strong>Heart attack or stroke</strong>Not eligible for Group Term. Use Modified Life (ALX) or Career Life Plus if ALX is not available in your state.</div>
+      <div class="hcard"><strong>Diabetes treated with insulin</strong>Not eligible for Group Term. Use Modified Life (ALX) or Career Life Plus if ALX is not available in your state.</div>
+      <div class="hcard"><strong>High Blood Pressure</strong>Not eligible for Group Term if most recent reading is higher than 140/90.</div>
+      <div class="hcard"><strong>Cancer</strong>Applicants diagnosed with cancer are not eligible for Cash Cancer or Cancer Endurance.</div>
+    </div>
+  </div>
+</div>
+
+<!-- WHY WE ARE HERE / WORKSITE ADVANTAGE -->
+<div class="section" id="s-why">
+  <div class="section-header"><span class="page-badge">Page 8</span><span class="section-title">Why We Are Here &amp; Worksite Advantage</span></div>
+  <div class="section-body">
+    <div class="block">
+      <div class="lbl">Agent — Why We Are Here</div>
+      <div class="line">"Now <span class="blank">&nbsp;</span>, like I said our goal today is to be able to fill any needs you may have, while fitting within your tailored budget, so we can maximize your savings and still be able to help protect you and the ones you love the most."</div>
+    </div>
+    <hr class="div">
+    <div class="block">
+      <div class="lbl">Agent — Worksite Advantage</div>
+      <div class="line">"<span class="blank">&nbsp;</span>, at Globe Life Liberty National Division, we understand you may not stay at the same job forever. That's why we made sure our Worksite Advantage product is both permanent and portable."</div>
+      <div class="line">"<span class="blank">&nbsp;</span>, what this means to you is that:"</div>
+      <ul class="blist">
+        <li>If you ever leave your current employment, you can keep your coverage, with no increase to premium.</li>
+        <li>Your coverage cannot be canceled as long as the premiums are met on time, which occurs through <span class="em">(Name of Business)</span>.</li>
+        <li>Once your coverage is in place, your rate is locked in at your current age and cannot increase.</li>
+      </ul>
+      <div class="line">"I'm sure you can see why <span class="em">(Business Owner)</span> brought us in today?"</div>
+    </div>
+  </div>
+</div>
+
+<!-- FINAL EXPENSE INTRO -->
+<div class="section" id="s-final-intro">
+  <div class="section-header"><span class="page-badge">Page 9</span><span class="section-title">Final Expense: Introduction</span></div>
+  <div class="section-body">
+    <div class="note"><strong>Note:</strong> The Final Expense Slide will only populate if Employee or Spouse has a need and/or our Final Expense coverage is within budget.</div>
+    <div class="block">
+      <div class="lbl">Agent</div>
+      <div class="line">"So <span class="blank">&nbsp;</span>, the first benefit you may qualify for is our Final Expense protection. At some point your family WILL have to deal with this concern. Have you ever had to plan a funeral for a loved one? Do you know what the average cost of a funeral these days?"</div>
+      <div class="line">"As you can see here, with all these additional expenses, the average cost of a funeral today is around $20,000 nationwide."</div>
+      <div class="line">"Even a simple cremation can cost over $6,000. Not to mention additional expenses and inflation, which are expected to raise final expense costs to $50,000 in the next 30 years."</div>
+      <div class="line">"Now <span class="blank">&nbsp;</span>, what a lot of people don't realize is that funeral homes require payments to be made up front, and, if you're like most families, they don't have this kind of money just laying around. And if you did, you didn't set it aside for that!"</div>
+      <div class="line">"I'm sure you can see how this can put families in a difficult spot, yes?"</div>
+    </div>
+  </div>
+</div>
+
+<!-- FREEDOM OF CHOICE -->
+<div class="section" id="s-freedom">
+  <div class="section-header"><span class="page-badge">Page 10</span><span class="section-title">Final Expense: Freedom of Choice Certificate</span></div>
+  <div class="section-body">
+    <div class="block">
+      <div class="lbl">Agent</div>
+      <div class="line">"That's why they have created the Freedom of Choice certificate to help take care of this concern. This will help address a huge burden for your family. This is what your beneficiary will take into the funeral home instead of handing your policy to the Funeral Director. Most, if not everything, will be taken care of. It could be used for items such as the plot, headstone, funeral or cremation, urn, and services."</div>
+      <div class="line">"What's great about the certificate is that there is no dollar amounts on it. When your beneficiary takes this into the funeral home, they shouldn't tell them what it's worth because, <span class="blank">&nbsp;</span>, if the Funeral Director knew your certificate was worth $30,000, guess how much your funeral is going to cost?"</div>
+    </div>
+    <div class="block">
+      <div class="lbl">Agent <span class="em">(waits for response)</span></div>
+      <div class="line">"Exactly! This will allow your family to negotiate and get the best deal possible. The Funeral Director will then call the number on the front to ensure the program is in effect. Does that make sense?"</div>
+    </div>
+    <div class="note"><strong>Note:</strong> Recommended Final Expense Coverage Slide will populate based on the answers to health questions and age.</div>
+  </div>
+</div>
+
+<!-- GROUP TERM / FE PROPOSAL -->
+<div class="section" id="s-groupterm">
+  <div class="section-header"><span class="page-badge">Page 11</span><span class="section-title">Group Term Life &amp; Final Expense Proposal</span></div>
+  <div class="section-body">
+    <div class="block">
+      <div class="lbl">Agent — Group Term Life</div>
+      <div class="line">"With this in mind, Liberty National Division has made available our Group Term Life protection. <span class="blank">&nbsp;</span>, unlike other group life products that increase in premium, decrease in coverage amount, or terminate altogether, our Group Term Life coverage can remain in force until age 100, with an option to be paid up at age 65."</div>
+      <div class="line">"Make sense so far?"</div>
+    </div>
+    <hr class="div">
+    <div class="note"><strong>Note:</strong> The Final Expense Proposal is generated based on the Client's existing permanent coverage and current need for Final Expense coverage.</div>
+    <div class="block">
+      <div class="lbl">Agent — Final Expense Proposal</div>
+      <div class="line">"<span class="blank">&nbsp;</span>, as we just went over, the average cost of a funeral is around $20,000, however with inflation, it's expected to increase to $50,000 over the next 30 years. Here you can see that it is recommending you have $<span class="blank">&nbsp;</span> of coverage of our <span class="em">(Group Life Product)</span>, and <span class="blank">&nbsp;</span> of coverage for your spouse as well <span class="em">(if applicable)</span>."</div>
+      <span class="strong-close">"I'm sure you can see how absolutely important this benefit is when something happens to you, yes?"</span>
+    </div>
+  </div>
+</div>
+
+<!-- INCOME PROTECTION -->
+<div class="section" id="s-income">
+  <div class="section-header"><span class="page-badge">Page 12</span><span class="section-title">Income Protection: Introduction</span></div>
+  <div class="section-body">
+    <div class="note"><strong>Note:</strong> If applicable, Income Protection Proposal slide populates with recommended coverage.</div>
+    <div class="block">
+      <div class="lbl">Agent</div>
+      <div class="line">"On top of taking care of the money that is needed for final expenses, another major concern is how your surviving spouse or significant other will continue to pay all the bills after your income has stopped coming in."</div>
+      <div class="line">"A lot of the time we take our paychecks for granted. It's kind of like your heartbeat; you don't really notice it… until it stops. If your income were to stop, it would be like a financial heart attack! <span class="blank">&nbsp;</span>, how would your family replace your income if it suddenly stopped? If you are like most people, by the time you think of it, it is too late!"</div>
+      <div class="line">"Most families can't afford to lose just one paycheck, let alone the rest of your paychecks forever! As the slide shows, we recommend about $200,000 of accidental death coverage for a family to have enough money to maintain their lifestyle with this sudden loss of income."</div>
+      <div class="line">"<span class="blank">&nbsp;</span>, I assume you would want <span class="em">(name of Accidental Death Policy's beneficiary)</span> to be your beneficiary for this benefit as well?"</div>
+    </div>
+  </div>
+</div>
+
+<!-- FINAL OFFER / CLOSE -->
+<div class="section" id="s-close">
+  <div class="section-header"><span class="page-badge">Page 13</span><span class="section-title">Income Protection Proposal &amp; Final Offer</span></div>
+  <div class="section-body">
+    <div class="block">
+      <div class="lbl">Agent — Income Protection Proposal</div>
+      <div class="line">"<span class="blank">&nbsp;</span>, as you can see here, we've provided $<span class="blank">&nbsp;</span> of income protection for both you and your spouse <span class="em">(if applicable)</span>. This could help your family maintain their quality of life in the event of you or your spouse's unexpected death."</div>
+      <span class="strong-close">"I'm sure you can see how vitally important having something like this in place is when you die, wouldn't you agree?"</span>
+    </div>
+    <hr class="div">
+    <div class="block">
+      <div class="lbl">Agent — Final Offer</div>
+      <div class="line">"To summarize, our plan helps secure your final expenses and protect your income to help maintain your family's lifestyle. If everything makes sense, starting today you've taken a crucial step towards coverage tailored to your current needs."</div>
+      <div class="line">"<span class="blank">&nbsp;</span>, all I need to know from you is what option makes sense. Option 1 covers you for inflation, and option 2 covers you for today's cost. Which one is the most comfortable for you?"</div>
+    </div>
+    <div class="action">Finish eApp questions and have the client sign the policies.</div>
+  </div>
+</div>
+
+</main>
+
+<script>
+  var buttons = document.querySelectorAll('#topnav button');
+  buttons.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var targetId = btn.getAttribute('data-target');
+      var el = document.getElementById(targetId);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+        buttons.forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+      }
+    });
+  });
+
+  window.addEventListener('scroll', function() {
+    var scrolled = window.scrollY;
+    var total = document.body.scrollHeight - window.innerHeight;
+    if (total > 0) {
+      document.getElementById('pgbar').style.width = Math.min(100, (scrolled / total) * 100) + '%';
+    }
+  });
+</script>
+
+</body>
+</html>
